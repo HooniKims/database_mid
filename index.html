@@ -17,6 +17,7 @@
                     <li><a href="#problem1">문제 1: 모델 변환</a></li>
                     <li><a href="#problem2">문제 2: 관계대수</a></li>
                     <li><a href="#problem3">문제 3: SQL</a></li>
+                    <li><a href="#sql-examples">SQL 예시</a></li>
                 </ul>
             </nav>
         </div>
@@ -57,20 +58,28 @@
                     </article>
                 </div>
 
-                <h3>데이터베이스 정규화의 핵심 개념</h3>
-                <ul>
-                    <li>데이터 중복 제거 및 저장 공간 최적화</li>
-                    <li>삽입, 수정, 삭제 이상현상 방지</li>
-                    <li>데이터 무결성 보장</li>
-                    <li>데이터 구조의 안정성 향상</li>
-                </ul>
-
-                <h3>비정규화 고려사항</h3>
-                <ul>
-                    <li>조회 성능 향상이 주요 목적</li>
-                    <li>의도적인 정규화 원칙 위배</li>
-                    <li>데이터 정합성 유지를 위한 추가 작업 필요</li>
-                </ul>
+                <h3>정규화와 비정규화, 쉽게 알아보기</h3>
+                <p>데이터를 표에 저장하는 방식에는 크게 '정리정돈'을 우선하는 <strong>정규화</strong>와 '속도'를 우선하는 <strong>비정규화</strong>가 있습니다.</p>
+                <div class="grid-container">
+                    <article>
+                        <h4>정규화 (깔끔하게 정리하기)</h4>
+                        <p>데이터를 주제에 맞게 여러 표로 잘게 나누어 저장하는 방법입니다. 이렇게 하면 다음과 같은 장점이 있어요.</p>
+                        <ul>
+                            <li><strong>데이터 중복 최소화:</strong> 같은 정보가 여러 번 저장되는 것을 막아줘요.</li>
+                            <li><strong>이상 현상 방지:</strong> 데이터가 중복되어 생기는 수정/삭제/추가의 어려움을 해결해요.</li>
+                            <li><strong>데이터 무결성 향상:</strong> 데이터가 항상 정확하고 일관된 상태, 즉 '믿을 수 있는 데이터'가 되도록 도와줘요.</li>
+                        </ul>
+                    </article>
+                    <article>
+                        <h4>비정규화 (빠르게 찾아보기)</h4>
+                        <p>정리된 표를 일부러 합쳐서 중복을 허용하는 방법입니다. 데이터를 찾을 때 여러 표를 볼 필요가 없어서 속도가 빨라져요.</p>
+                        <ul>
+                            <li><strong>조회 성능 향상:</strong> 여러 표를 합치는 '조인' 연산이 줄어들어 검색이 빨라져요.</li>
+                            <li><strong>단순한 쿼리:</strong> 데이터를 찾는 명령어가 더 간단해져요.</li>
+                            <li><strong>주의점:</strong> 데이터가 중복되므로, 정보를 바꿀 때 모든 중복 데이터를 함께 바꿔주는 추가 작업이 필요해요.</li>
+                        </ul>
+                    </article>
+                </div>
                 <div class="image-container">
                     <img src="images/problem1.png" alt="데이터베이스 모델 비교">
                 </div>
@@ -88,45 +97,61 @@
                 </div>
                 <p>두 릴레이션 R(A,B)와 S(B,C)에 대한 합집합, 차집합, 카티션 곱, 선택 연산의 결과를 구하는 문제입니다.</p>
                 
-                <h3>관계대수 연산 결과</h3>
+                <h3>관계대수 연산 결과 (쉬운 풀이)</h3>
                 <ul>
-                    <li>① R ∪ S (합집합): <strong>정의되지 않음</strong> (두 릴레이션이 동일한 속성을 가져야 함)</li>
-                    <li>② R - S (차집합): <strong>정의되지 않음</strong> (합집합과 마찬가지로 스키마 호환성 필요)</li>
-                    <li>③ R × S (카티션 곱): <strong>4개 튜플 생성</strong> (|R| × |S| = 2 × 2 = 4)</li>
-                    <li>④ σ<sub>B='b1'</sub>(S): <strong>2개 튜플 선택</strong> (S의 모든 튜플이 조건을 만족)</li>
+                    <li>
+                        <strong>① R ∪ S (합집합):</strong> <strong>정의되지 않음</strong><br>
+                        <small><strong>이유:</strong> 합집합은 두 표의 구조(열의 개수와 종류)가 똑같을 때만 가능해요. 문제의 두 표 R(A,B)과 S(B,C)는 구조가 달라서 합칠 수 없어요.</small>
+                    </li>
+                    <li>
+                        <strong>② R - S (차집합):</strong> <strong>정의되지 않음</strong><br>
+                        <small><strong>이유:</strong> 차집합도 합집합처럼 두 표의 구조가 같아야만 계산할 수 있어요.</small>
+                    </li>
+                    <li>
+                        <strong>③ R × S (카티션 곱):</strong> <strong>4개의 줄(튜플) 생성</strong><br>
+                        <small><strong>이유:</strong> 카티션 곱은 한쪽 표의 모든 줄을 다른 쪽 표의 모든 줄과 하나씩 짝짓는 연산이에요. R표에 2줄, S표에 2줄이 있으니 총 2 x 2 = 4개의 조합이 만들어져요.</small>
+                    </li>
+                    <li>
+                        <strong>④ σ<sub>B='b1'</sub>(S):</strong> <strong>2개의 줄(튜플) 선택</strong><br>
+                        <small><strong>이유:</strong> '선택(σ)' 연산은 조건에 맞는 줄만 골라내는 거예요. S표에서 'B열의 값이 b1인' 줄을 찾으면, 두 줄 모두 해당되므로 2개가 선택돼요.</small>
+                    </li>
                 </ul>
 
-                <h3>관계대수의 기본 원리</h3>
+                <h3>관계대수 용어, 쉽게 이해하기</h3>
+                <p>관계대수는 데이터베이스의 데이터를 '어떻게 다룰지'에 대한 수학적인 방법입니다. 어려운 기호들이 많지만, 알고 보면 간단한 개념들입니다.</p>
+                
+                <article class="summary-box">
+                    <h4>기본 용어 정리</h4>
+                    <ul>
+                        <li><strong>릴레이션 (Relation):</strong> 그냥 '표(Table)'라고 생각하면 쉬워요.</li>
+                        <li><strong>튜플 (Tuple):</strong> 표의 '가로 한 줄' 데이터입니다. (예: 한 학생의 정보)</li>
+                        <li><strong>속성 (Attribute):</strong> 표의 '세로 한 줄', 즉 '열(Column)'입니다. (예: 이름, 학번, 학과)</li>
+                        <li><strong>스키마 (Schema):</strong> 표의 '구조'나 '설계도'입니다. 어떤 속성들로 이루어져 있는지 나타내죠.</li>
+                    </ul>
+                </article>
+
+                <h4>주요 연산자 풀이</h4>
                 <div class="grid-container">
                     <article>
-                        <h4>집합 연산자</h4>
+                        <h5>집합 연산자 (두 표를 하나로)</h5>
                         <ul>
-                            <li>합집합(∪), 교집합(∩), 차집합(-)</li>
-                            <li>합병 가능한 릴레이션 필요 (속성 개수와 타입 동일, 도메인 호환)</li>
+                            <li><strong>합집합 (∪):</strong> 두 개의 표를 위아래로 합쳐서 하나의 큰 표로 만듭니다. (단, 두 표의 열 구조가 같아야 해요.)</li>
+                            <li><strong>차집합 (-):</strong> 첫 번째 표에서 두 번째 표와 내용이 똑같은 줄을 빼고 남은 것만 보여줍니다.</li>
+                            <li><strong>카티션 곱 (×):</strong> 두 표의 모든 줄을 하나하나 짝지어, 나올 수 있는 모든 조합을 만듭니다. (결과가 매우 커질 수 있어요!)</li>
                         </ul>
                     </article>
                     <article>
-                        <h4>순수 관계 연산자</h4>
+                        <h5>관계 연산자 (표를 자르거나 붙이기)</h5>
                         <ul>
-                            <li>선택(σ): 조건을 만족하는 튜플 선택</li>
-                            <li>투영(π): 특정 속성만 추출</li>
-                            <li>조인(⨝): 두 릴레이션을 연결</li>
-                            <li>나눗셈(÷): 특정 조건을 모두 만족하는 튜플 반환</li>
+                            <li><strong>선택 (σ):</strong> 조건에 맞는 '가로줄(튜플)'만 골라냅니다. (예: "학년이 4학년인 학생만 보여줘!")</li>
+                            <li><strong>투영 (π):</strong> 필요한 '세로줄(속성)'만 뽑아서 보여줍니다. (예: "모든 학생의 이름과 학번만 보여줘!")</li>
+                            <li><strong>조인 (⨝):</strong> 공통된 열을 기준으로 두 표를 옆으로 붙여서 새로운 정보를 만듭니다. 가장 많이 쓰이는 중요한 연산이에요.</li>
                         </ul>
                     </article>
                 </div>
                 <div class="image-container">
                     <img src="images/problem2.png" alt="관계대수 연산">
                 </div>
-                <article class="summary-box">
-                    <h4>쉬운 설명: 수학처럼 표를 계산하기</h4>
-                    <p>두 개의 표 R(이름, 나이)과 S(나이, 취미)가 있을 때:</p>
-                    <ul>
-                        <li><strong>합치기/빼기 (∪, -):</strong> ❌ 불가능! (항목 종류가 달라서)</li>
-                        <li><strong>모든 조합 만들기 (×):</strong> ✅ 가능! (모든 경우의 수를 조합)</li>
-                        <li><strong>조건 찾기 (σ):</strong> ✅ 가능! (조건에 맞는 것만 골라내기)</li>
-                    </ul>
-                </article>
             </section>
 
             <section id="problem3" class="card">
@@ -160,6 +185,15 @@ CREATE TABLE Employee (
         -- FOREIGN KEY: 다른 테이블(Department)의 dept_no를 참조 (연결)함
         -- 즉, Employee의 dept_no는 Department 테이블에 있는 부서 번호 중 하나여야 함
 );</code></pre>
+                    <article class="summary-box">
+                        <h4>쉬운 용어 풀이 (a)</h4>
+                        <ul>
+                            <li><strong>CREATE TABLE:</strong> '표 만들기' 라는 뜻이에요. 데이터를 저장할 공간을 만듭니다.</li>
+                            <li><strong>PRIMARY KEY:</strong> '기본 열쇠'처럼 각 줄을 구별하는 고유한 값입니다. (예: 학번, 주민등록번호)</li>
+                            <li><strong>NOT NULL:</strong> '비워두면 안 됨' 이라는 규칙으로, 필수 입력 항목을 의미합니다.</li>
+                            <li><strong>FOREIGN KEY:</strong> 다른 표와 연결하는 '연결고리' 역할입니다. (예: 직원 정보에 부서 번호를 연결)</li>
+                        </ul>
+                    </article>
                 </div>
 
                 <div class="sql-example">
@@ -173,6 +207,15 @@ FROM Employee e                    -- Employee 테이블을 e라는 별명으로
 JOIN Department d                   -- Department 테이블을 d라는 별명으로 사용
     ON e.dept_no = d.dept_no         -- 두 테이블을 부서 번호(dept_no)로 연결
 WHERE e.emp_no = 'E103';            -- e(Employee)의 사번(emp_no)이 'E103'인 경우만 찾음</code></pre>
+                    <article class="summary-box">
+                        <h4>쉬운 용어 풀이 (b)</h4>
+                        <ul>
+                            <li><strong>SELECT:</strong> '선택하기' 라는 뜻으로, 보고 싶은 정보(열)를 고릅니다.</li>
+                            <li><strong>FROM:</strong> '...에서 가져오기' 라는 뜻으로, 어떤 표에서 데이터를 가져올지 지정합니다.</li>
+                            <li><strong>JOIN...ON:</strong> 두 개의 표를 특정 조건(ON)에 맞춰 합치는 기능입니다.</li>
+                            <li><strong>WHERE:</strong> '...인 경우만' 이라는 뜻으로, 원하는 조건에 맞는 데이터만 골라냅니다.</li>
+                        </ul>
+                    </article>
                 </div>
 
                 <div class="sql-example">
@@ -187,6 +230,14 @@ FROM Employee e
 JOIN Department d
     ON e.dept_no = d.dept_no         -- 부서 번호로 두 테이블 연결
 GROUP BY d.dept_name;                -- 부서 이름별로 묶어서(그룹별로) 평균을 계산</code></pre>
+                    <article class="summary-box">
+                        <h4>쉬운 용어 풀이 (c)</h4>
+                        <ul>
+                            <li><strong>AVG(...):</strong> '평균'을 계산하는 함수입니다.</li>
+                            <li><strong>AS:</strong> '...라는 이름으로' 라는 뜻으로, 결과 표의 열 이름을 보기 좋게 바꿔줍니다.</li>
+                            <li><strong>GROUP BY:</strong> '그룹으로 묶기' 라는 뜻으로, 특정 항목(예: 부서)별로 데이터를 묶어 계산할 때 사용합니다.</li>
+                        </ul>
+                    </article>
                 </div>
 
                 <div class="sql-example">
@@ -203,6 +254,12 @@ JOIN Employee e2                      -- Employee 테이블을 e2라는 별명�
 JOIN Department d
     ON e2.dept_no = d.dept_no          -- 부서 번호로 Department 테이블 연결
 WHERE e1.emp_name = '백영란';          -- 첫 번째 직원(e1)의 이름이 '백영란'인 경우</code></pre>
+                    <article class="summary-box">
+                        <h4>쉬운 용어 풀이 (d)</h4>
+                        <ul>
+                            <li><strong>SELF JOIN:</strong> '자기 자신과 합치기' 라는 뜻으로, 하나의 표를 두 개인 것처럼 사용하여 내부 데이터를 비교할 때 씁니다.</li>
+                        </ul>
+                    </article>
                 </div>
 
                 <div class="sql-example">
@@ -215,6 +272,14 @@ UPDATE Employee
 SET years = years + 1;       -- years(현재 근무연수)에 1을 더함
 
 SELECT * FROM Employee;      -- Employee 테이블의 모든 칼럼(*)을 다 보여줌</code></pre>
+                    <article class="summary-box">
+                        <h4>쉬운 용어 풀이 (e)</h4>
+                        <ul>
+                            <li><strong>UPDATE:</strong> '수정하기' 라는 뜻으로, 표의 기존 데이터를 바꿀 때 사용합니다.</li>
+                            <li><strong>SET:</strong> '...으로 맞추기' 라는 뜻으로, 어떤 값을 어떻게 바꿀지 지정합니다.</li>
+                            <li><strong>SELECT *:</strong> '*'는 '모든 것'을 의미하며, 표의 모든 열을 보여달라는 뜻입니다.</li>
+                        </ul>
+                    </article>
                 </div>
 
                 <h3>SQL 핵심 개념 정리</h3>
@@ -248,16 +313,170 @@ SELECT * FROM Employee;      -- Employee 테이블의 모든 칼럼(*)을 다 �
                 </div>
 
                 <article class="summary-box">
-                    <h4>쉬운 설명: 컴퓨터에게 명령하기 (SQL)</h4>
-                    <ul>
-                        <li><strong>CREATE:</strong> 새로운 표 만들기</li>
-                        <li><strong>SELECT:</strong> 정보 찾기</li>
-                        <li><strong>JOIN:</strong> 여러 표 연결하기</li>
-                        <li><strong>UPDATE:</strong> 정보 바꾸기</li>
-                        <li><strong>GROUP BY:</strong> 비슷한 것끼리 묶기</li>
-                    </ul>
-                    <p><em>예시: "백영란과 같은 부서 사람 찾기" → 백영란의 부서를 먼저 찾고(SELECT), 그 부서에 속한 다른 사람들을 찾아요(JOIN).</em></p>
+                    <h4>쉬운 설명: 컴퓨터에게 SQL로 명령하기</h4>
+                    <p>SQL은 '데이터베이스 전용 언어'입니다. 우리가 사람에게 말하듯, 컴퓨터의 데이터베이스에게 "이런 데이터 좀 찾아줘" 또는 "이 정보 좀 저장해줘" 라고 명령할 때 사용하는 특별한 언어입니다. SELECT, FROM, WHERE 같은 영어 단어를 조합해서 사용하죠.</p>
                 </article>
+            </section>
+
+            <section id="sql-examples" class="card">
+                <h3>SQL 예시: 초보자를 위한 상황별 코드</h3>
+                <p>가장 일반적으로 사용되는 '학생(Students)' 테이블을 예시로 SQL 명령어를 종류별로 알아봅시다.</p>
+
+                <!-- DDL 예시 -->
+                <h4 class="sql-category">1. 데이터 정의어 (DDL): 테이블 구조 만들기</h4>
+                <p>DDL은 데이터를 담을 '표(테이블)'의 구조를 만들거나(CREATE), 바꾸거나(ALTER), 삭제(DROP)할 때 사용합니다.</p>
+                <div class="sql-example">
+                    <h5>(1) CREATE: 학생 정보 테이블 만들기</h5>
+                    <pre><code class="sql">/*
+학생 정보를 저장할 'Students'라는 이름의 표를 만듭니다.
+어떤 정보를 저장할지 각 열(Column)의 이름과 데이터 타입을 정해줍니다.
+*/
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,  -- 학생 ID (숫자, 중복 불가, 각 학생을 구별하는 고유값)
+    name VARCHAR(50) NOT NULL,   -- 이름 (최대 50글자, 비워둘 수 없음)
+    major VARCHAR(50),           -- 전공 (최대 50글자, 비워둬도 됨)
+    grade INT,                   -- 학년 (숫자)
+    birth_date DATE              -- 생년월일 (날짜 형식, 예: '2005-03-15')
+);</code></pre>
+                    <article class="summary-box">
+                        <h6>용어 팁</h6>
+                        <ul>
+                            <li><strong>INT:</strong> 정수(Integer) 숫자를 의미해요. (예: 1, 100, -5)</li>
+                            <li><strong>VARCHAR(n):</strong> 최대 n글자까지 들어가는 문자열(Variable Character)을 의미해요.</li>
+                            <li><strong>DATE:</strong> 날짜 데이터를 의미해요.</li>
+                            <li><strong>PRIMARY KEY:</strong> 이 열은 절대로 중복된 값을 가질 수 없으며, 각 데이터를 식별하는 기준이 됩니다.</li>
+                            <li><strong>NOT NULL:</strong> 이 열은 비워둘 수 없다는 뜻입니다. 반드시 값을 넣어야 해요.</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="sql-example">
+                    <h5>(2) ALTER: 테이블 구조 변경하기</h5>
+                    <pre><code class="sql">/*
+이미 만들어진 'Students' 테이블에 'email'이라는 새로운 열을 추가합니다.
+*/
+-- 이메일(email) 열 추가하기
+ALTER TABLE Students
+ADD email VARCHAR(100); -- 최대 100글자의 이메일 주소를 저장할 공간 추가
+
+/*
+'grade' 열의 이름을 'student_grade'로 변경해봅시다. (데이터베이스 종류에 따라 문법이 다를 수 있음)
+*/
+-- 열 이름 변경하기 (MySQL 예시)
+ALTER TABLE Students
+RENAME COLUMN grade TO student_grade;</code></pre>
+                </div>
+                <div class="sql-example">
+                    <h5>(3) DROP: 테이블 삭제하기</h5>
+                    <pre><code class="sql">/*
+'Students' 테이블이 더 이상 필요 없을 때, 테이블과 안의 모든 데이터를 완전히 삭제합니다.
+(주의! 실행하면 복구하기 매우 어렵습니다.)
+*/
+DROP TABLE Students;</code></pre>
+                </div>
+
+                <!-- DML 예시 -->
+                <h4 class="sql-category">2. 데이터 조작어 (DML): 데이터 다루기</h4>
+                <p>DML은 테이블에 실제 데이터를 넣거나(INSERT), 찾아보거나(SELECT), 바꾸거나(UPDATE), 지울 때(DELETE) 사용합니다.</p>
+                <div class="sql-example">
+                    <h5>(1) INSERT: 새로운 데이터 추가하기</h5>
+                    <pre><code class="sql">/*
+'Students' 테이블에 새로운 학생 3명의 정보를 추가합니다.
+*/
+INSERT INTO Students (student_id, name, major, student_grade, birth_date, email)
+VALUES (2024001, '김민준', '컴퓨터공학', 2, '2004-05-10', 'mj.kim@example.com');
+
+INSERT INTO Students (student_id, name, major, student_grade, birth_date, email)
+VALUES (2024002, '이서연', '경영학', 1, '2005-11-22', 'sy.lee@example.com');
+
+INSERT INTO Students (student_id, name, major, student_grade) -- 생일, 이메일 정보는 빼고 추가
+VALUES (2024003, '박하은', '디자인', 4);</code></pre>
+                </div>
+                <div class="sql-example">
+                    <h5>(2) SELECT: 데이터 조회하기</h5>
+                    <pre><code class="sql">/*
+'Students' 테이블에서 원하는 정보를 찾아봅니다. 가장 많이 사용하는 명령어입니다.
+*/
+-- 모든 학생의 모든 정보 보기
+SELECT * FROM Students;
+
+-- 학생들의 '이름'과 '전공' 정보만 보기
+SELECT name, major FROM Students;
+
+-- '컴퓨터공학' 전공인 학생만 찾기
+SELECT * FROM Students
+WHERE major = '컴퓨터공학';
+
+-- 2학년 이상인 학생들의 이름과 학년 보기
+SELECT name, student_grade FROM Students
+WHERE student_grade >= 2;
+
+-- 학생들을 이름 순서(가나다순)로 정렬해서 보기
+SELECT * FROM Students
+ORDER BY name ASC; -- ASC: 오름차순 (생략 가능), DESC: 내림차순</code></pre>
+                </div>
+                <div class="sql-example">
+                    <h5>(3) UPDATE: 데이터 수정하기</h5>
+                    <pre><code class="sql">/*
+'Students' 테이블에 저장된 정보를 변경합니다.
+*/
+-- 학생 ID가 2024003인 학생의 전공을 '시각디자인'으로 변경
+UPDATE Students
+SET major = '시각디자인'
+WHERE student_id = 2024003;
+
+-- 모든 2학년 학생들의 학년을 3학년으로 올리기 (주의: WHERE를 안 쓰면 모든 데이터가 바뀜!)
+UPDATE Students
+SET student_grade = 3
+WHERE student_grade = 2;</code></pre>
+                </div>
+                <div class="sql-example">
+                    <h5>(4) DELETE: 데이터 삭제하기</h5>
+                    <pre><code class="sql">/*
+'Students' 테이블에서 특정 데이터를 삭제합니다.
+*/
+-- 학생 ID가 2024001인 학생의 정보를 삭제
+DELETE FROM Students
+WHERE student_id = 2024001;</code></pre>
+                </div>
+
+                <h4 class="sql-category">3. 고급 조회: 여러 테이블 정보 합치고 분석하기</h4>
+                <p>실제 데이터베이스는 여러 테이블로 구성되어 있습니다. 이 테이블들을 연결(JOIN)하고 그룹으로 묶어(GROUP BY) 의미있는 정보를 뽑아낼 수 있습니다.</p>
+                <div class="sql-example">
+                    <h5>(1) JOIN: 테이블 연결하기</h5>
+                    <p>학생들이 어떤 과목을 수강하는지 알려주는 'Enrollments' 테이블이 있다고 가정해봅시다.</p>
+                    <pre><code class="sql">/*
+-- 수강 정보 테이블 (가상)
+CREATE TABLE Enrollments (
+    enrollment_id INT PRIMARY KEY,
+    student_id INT, -- 어떤 학생이
+    course_name VARCHAR(50) -- 어떤 과목을 듣는지
+);
+*/
+
+-- 학생 이름과 그 학생이 수강하는 과목 이름을 함께 보고 싶을 때
+SELECT s.name, e.course_name
+FROM Students s
+JOIN Enrollments e ON s.student_id = e.student_id; -- 두 테이블의 학생 ID가 같은 것끼리 연결
+</code></pre>
+                </div>
+                <div class="sql-example">
+                    <h5>(2) GROUP BY & HAVING: 그룹별로 분석하기</h5>
+                    <pre><code class="sql">/*
+전공별로 학생이 몇 명이나 있는지 세어봅니다.
+*/
+SELECT major, COUNT(*) AS student_count -- COUNT(*): 모든 줄의 개수를 셈
+FROM Students
+GROUP BY major; -- 전공이 같은 학생들끼리 그룹으로 묶음
+
+/*
+학생 수가 10명 이상인 전공만 보고 싶을 때
+*/
+SELECT major, COUNT(*) AS student_count
+FROM Students
+GROUP BY major
+HAVING COUNT(*) >= 10; -- GROUP BY로 묶인 결과에 조건을 걸 때 사용
+</code></pre>
+                </div>
             </section>
         </div>
     </main>
