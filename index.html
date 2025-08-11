@@ -14,6 +14,7 @@
             <h1>데이터베이스 중간 예제 풀이</h1>
             <nav>
                 <ul>
+                    <li><a href="#db-summary">DB 핵심 정리</a></li>
                     <li><a href="#problem1">문제 1: 모델 변환</a></li>
                     <li><a href="#problem2">문제 2: 관계대수</a></li>
                     <li><a href="#problem3">문제 3: SQL</a></li>
@@ -25,6 +26,83 @@
 
     <main>
         <div class="container">
+            <section id="db-summary" class="card">
+                <h2>📄 데이터베이스 핵심 정리 (쉬운 버전)</h2>
+                
+                <h3>1. 데이터베이스 기본</h3>
+                <p><strong>정의:</strong> 여러 사람이 함께 사용할 수 있도록 데이터를 체계적으로 모아둔 저장소<br>
+                → 쉽게 말해, 컴퓨터 안에 있는 ‘정리된 데이터 창고’</p>
+                
+                <h4>특징</h4>
+                <ul>
+                    <li>여러 사람이 동시에 사용 가능</li>
+                    <li>중복 데이터 줄임 → 데이터가 헷갈리지 않게 함</li>
+                    <li>필요할 때 빠르게 검색·수정·삭제 가능</li>
+                </ul>
+
+                <h3>2. 데이터베이스 종류와 장단점</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>종류</th>
+                                <th>설명</th>
+                                <th>장점</th>
+                                <th>단점</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>계층형 DB</td>
+                                <td>데이터가 <strong>트리(나무)</strong>처럼 층층이 연결됨. 부모-자식 관계가 확실함.<br>📌 예: 회사 조직도, 폴더 구조</td>
+                                <td>- 구조가 단순해 이해 쉬움<br>- 데이터 찾는 속도가 빠름</td>
+                                <td>- 구조를 바꾸기 어려움<br>- 새로운 데이터 연결이 불편</td>
+                            </tr>
+                            <tr>
+                                <td>네트워크형 DB</td>
+                                <td>데이터가 그물망처럼 서로 얽혀 연결됨.<br>📌 예: 항공편 노선도, SNS 친구 관계</td>
+                                <td>- 복잡한 관계를 잘 표현 가능<br>- 여러 경로로 접근 가능</td>
+                                <td>- 구조가 복잡함<br>- 설계·관리하기 어려움</td>
+                            </tr>
+                            <tr>
+                                <td>관계형 DB</td>
+                                <td>데이터를 <strong>표(테이블)</strong>로 저장하고 SQL로 관리.<br>📌 예: MySQL, Oracle, 학교 성적표</td>
+                                <td>- 직관적이고 사용이 편리함<br>- 표준화 쉬움, 관리 용이</td>
+                                <td>- 데이터가 매우 많아지면 속도가 느려질 수 있음<br>- 설계 과정 필요</td>
+                            </tr>
+                            <tr>
+                                <td>객체지향형 DB</td>
+                                <td>데이터를 객체 단위로 저장. 프로그램에서 쓰는 객체 개념과 같음.<br>📌 예: 3D 게임 데이터, 멀티미디어 DB</td>
+                                <td>- 복잡한 데이터 구조를 쉽게 표현<br>- 프로그램과 호환성 높음</td>
+                                <td>- 표준화 부족<br>- 배우고 구축하기 어려움</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>3. 데이터베이스 전체 장단점</h3>
+                <div class="grid-container">
+                    <article class="summary-box">
+                        <h4>장점</h4>
+                        <ul>
+                            <li><strong>중복 감소:</strong> 같은 데이터를 여러 번 저장하지 않아 공간 절약</li>
+                            <li><strong>일관성 유지:</strong> 틀린 데이터나 불일치 줄어듦</li>
+                            <li><strong>보안 관리 가능:</strong> 접근 권한 설정 가능</li>
+                            <li><strong>공유 용이:</strong> 여러 사용자가 동시에 사용 가능</li>
+                            <li><strong>백업·복구 용이:</strong> 오류나 장애 시 빠른 복구 가능</li>
+                        </ul>
+                    </article>
+                    <article class="summary-box">
+                        <h4>단점</h4>
+                        <ul>
+                            <li><strong>비용이 많이 듦:</strong> 구축·운영에 돈과 시간 필요</li>
+                            <li><strong>전문가 필요:</strong> 설계·관리 어려움</li>
+                            <li><strong>장애 시 영향 큼:</strong> 서버가 멈추면 전체 사용 불가</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
             <section id="intro" class="card">
                 <h2>데이터베이스 중간고사 문제 분석 및 정답 검토 보고서</h2>
                 <p>제출된 데이터베이스 중간고사 문제는 데이터베이스 설계, 관계대수, SQL 등 핵심 개념을 다루는 3개의 문제로 구성되어 있습니다. 각 문제의 풀이를 상세히 분석하고 정답 여부를 검토한 결과, 모든 문제가 정답으로 판정되었으며, 데이터베이스의 주요 개념들이 정확하게 이해되고 적용되었음을 확인했습니다.</p>
