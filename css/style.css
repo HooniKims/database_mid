@@ -229,3 +229,51 @@ footer {
     margin-top: 0;
     margin-bottom: 10px;
 }
+
+/* 관계대수 예시 테이블 스타일 */
+.table-examples table,
+.operator-examples table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #282c34; /* 어두운 배경색 */
+    color: #abb2bf; /* 밝은 글자색 */
+    border-radius: var(--border-radius);
+    overflow: hidden; /* radius 적용을 위해 */
+    box-shadow: var(--shadow);
+}
+
+.table-examples th, .table-examples td,
+.operator-examples th, .operator-examples td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: center;
+}
+
+.table-examples th,
+.operator-examples th {
+    background-color: #3c4049; /* 헤더 배경색 */
+    color: #e6e6e6;
+    font-weight: 700;
+}
+
+.operator-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.operator-examples article {
+    background: var(--card-background);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--secondary-color);
+}
+
+.operator-examples h5 {
+    font-size: 1.2em;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
