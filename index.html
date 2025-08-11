@@ -138,50 +138,6 @@
 
                 <div class="sql-example">
                     <h3>(a) 테이블 생성 (DDL)</h3>
-                    <p>DDL(Data Definition Language)은 테이블과 같은 데이터 구조를 정의하는 명령어입니다.</p>
-                    <pre><code class="sql">-- Department 테이블(부서 정보 저장소) 만들기
-CREATE TABLE Department (
-    dept_no CHAR(4) PRIMARY KEY,     -- 부서 번호 (문자 4글자, 예: 'D001') / PRIMARY KEY: 중복 불가 + 비어있을 수 없음
-    dept_name VARCHAR(20) NOT NULL,  -- 부서 이름 (최대 20글자) / NOT NULL: 반드시 값이 있어야 함
-    budget INT NOT NULL              -- 부서 예산 (정수 숫자) / NOT NULL: 반드시 값이 있어야 함
-);
-
--- Employee 테이블(직원 정보 저장소) 만들기
-CREATE TABLE Employee (
-    emp_no CHAR(4) PRIMARY KEY,          -- 사원 번호 (문자 4글자) / PRIMARY KEY: 중복 불가 + 비어있을 수 없음
-    emp_name VARCHAR(20) NOT NULL,       -- 사원 이름 (최대 20글자) / NOT NULL: 반드시 값이 있어야 함
-    dept_no CHAR(4) NOT NULL,            -- 부서 번호 (문자 4글자) / NOT NULL: 반드시 값이 있어야 함
-    salary INT NOT NULL,                 -- 급여 (정수) / NOT NULL: 반드시 값이 있어야 함
-    years INT NOT NULL,                  -- 근무 연수(몇 년 근무했는지) / NOT NULL
-    FOREIGN KEY (dept_no) REFERENCES Department(dept_no)
-        -- FOREIGN KEY: 다른 테이블(Department)의 dept_no를 참조 (연결)함
-        -- 즉, Employee의 dept_no는 Department 테이블에 있는 부서 번호 중 하나여야 함
-);</code></pre>
-                </div>
-
-                <div class="sql-example">
-                    <h3>(b) 특정 사원의 부서명 조회</h3>
-                    <p>사번 'E103'인 직원이 속한 부서의 이름을 조회합니다.</p>
-                    <pre><code class="sql">SELECT d.dept_name                 -- d(Department 테이블)의 부서 이름만 선택
-FROM Employee e                    -- Employee 테이블을 e라는 별명으로 사용
-JOIN Department d                   -- Department 테이블을 d라는 별명으로 사용
-    ON e.dept_no = d.dept_no         -- 두 테이블을 부서 번호(dept_no)로 연결
-WHERE e.emp_no = 'E103';            -- e(Employee)의 사번(emp_no)이 'E103'인 경우만 찾음</code></pre>
-                </div>
-
-                <div class="sql-example">
-                    <h3>(c) 부서별 평균 급여</h3>
-                    <p>각 부서별로 직원들의 평균 급여를 계산합니다.</p>
-                    <pre><code class="sql">SELECT d.dept_name,                  -- 부서 이름
-       AVG(e.salary) AS avg_salary   -- 그 부서의 평균 급여 (AVG: 평균 함수) / AS avg_salary: 결과 칼럼 이름 붙이기
-FROM Employee e
-JOIN Department d
-    ON e.dept_no = d.dept_no         -- 부서 번호로 두 테이블 연결
-GROUP BY d.dept_name;                -- 부서 이름별로 묶어서(그룹별로) 평균을 계산</code></pre>
-                </div>
-
-                <div class="sql-example">
-                    <h3>(a) 테이블 생성 (DDL)</h3>
                     <pre><code class="sql">/* ========================================================
 (a) 테이블 생성 (DDL)
 DDL: Data Definition Language → 테이블(데이터 저장소)을 만드는 명령어
@@ -259,6 +215,36 @@ UPDATE Employee
 SET years = years + 1;       -- years(현재 근무연수)에 1을 더함
 
 SELECT * FROM Employee;      -- Employee 테이블의 모든 칼럼(*)을 다 보여줌</code></pre>
+                </div>
+
+                <h3>SQL 핵심 개념 정리</h3>
+                <div class="grid-container">
+                    <article>
+                        <h4>DDL (Data Definition Language)</h4>
+                        <ul>
+                            <li><strong>CREATE:</strong> 테이블, 인덱스 등 객체 생성</li>
+                            <li><strong>ALTER:</strong> 기존 객체 구조 변경</li>
+                            <li><strong>DROP:</strong> 객체 삭제</li>
+                        </ul>
+                    </article>
+                    <article>
+                        <h4>DML (Data Manipulation Language)</h4>
+                        <ul>
+                            <li><strong>SELECT:</strong> 데이터 조회</li>
+                            <li><strong>INSERT:</strong> 데이터 삽입</li>
+                            <li><strong>UPDATE:</strong> 데이터 수정</li>
+                            <li><strong>DELETE:</strong> 데이터 삭제</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="sql-concepts">
+                    <h4>JOIN 연산의 종류</h4>
+                    <ul>
+                        <li><strong>INNER JOIN:</strong> 조건을 만족하는 교집합</li>
+                        <li><strong>LEFT/RIGHT JOIN:</strong> 한쪽 테이블 기준으로 결합</li>
+                        <li><strong>FULL OUTER JOIN:</strong> 모든 데이터 포함</li>
+                        <li><strong>SELF JOIN:</strong> 같은 테이블을 자기 자신과 결합</li>
+                    </ul>
                 </div>
 
                 <article class="summary-box">
